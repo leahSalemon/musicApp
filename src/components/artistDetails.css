@@ -1,0 +1,121 @@
+.artist-page-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background: #f0f0f0;
+  transform: translateX(-5px);
+}
+
+.artist-header {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.artist-main-img {
+  width: 350px;
+  height: 350px;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.artist-main-info h1 {
+  font-size: 4rem;
+  margin: 0;
+  color: #1a202c;
+}
+
+.genre-tag {
+  display: inline-block;
+  background: #ebf4ff;
+  color: #3182ce;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.bio-container {
+  margin-top: 30px;
+}
+
+.bio-container p {
+  line-height: 1.6;
+  color: #4a5568;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* שירים מובילים */
+.top-tracks-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+}
+
+.track-card {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  background: white;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.track-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.track-number {
+  font-weight: 800;
+  color: #cbd5e0;
+  margin-right: 20px;
+}
+
+.track-details {
+  flex: 1;
+}
+
+.track-name {
+  font-weight: 700;
+  margin: 0;
+}
+
+.track-album {
+  font-size: 0.9rem;
+  color: #718096;
+  margin: 0;
+}
+
+.track-duration {
+  font-family: monospace;
+  color: #a0aec0;
+}
+
+/* התאמה למובייל */
+@media (max-width: 768px) {
+  .artist-header { flex-direction: column; }
+  .artist-main-img { width: 100%; height: auto; }
+}
