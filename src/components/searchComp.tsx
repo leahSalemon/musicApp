@@ -3,8 +3,9 @@ import { Artist } from '../types/interfaces';
 import { fetchArtistsByName } from '../api/musicServices';
 import SearchInput from './searchInput';
 import ArtistCard from './artistCard';
+import './searchComp.css';
 
-const SearchPage = () => {
+const SearchComp = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -12,7 +13,6 @@ const SearchPage = () => {
     setLoading(true);
     try {
       const data = await fetchArtistsByName(term);
-      console.log("Fetched artists:", data);
       setArtists(data || []);
     } 
     catch (error) {
@@ -24,7 +24,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="search-page">
+    <div className="search-comp">
       <h1>Music Search</h1>
     
       <SearchInput onSearch={handleSearch} />
@@ -40,4 +40,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default SearchComp;

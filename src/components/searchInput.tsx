@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import './searchInput.css';
 
 interface SearchInputProps {
   onSearch: (term: string) => void;

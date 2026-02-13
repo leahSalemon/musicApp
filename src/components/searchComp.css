@@ -1,0 +1,47 @@
+.search-comp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* רקע מדורג רך */
+  padding: 80px 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.search-comp h1 {
+  font-size: 4.5rem;
+  color: #1a202c;
+  margin-bottom: 40px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.artist-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 60px;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* אנימציות כניסה */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.search-page p {
+  color: #4a5568;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  font-weight: 500;
+}
