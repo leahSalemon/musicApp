@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { Artist } from '../../types/interfaces';
+import { Artist } from '../types/interfaces';
+import { fetchArtistsByName } from '../api/musicServices';
+import SearchInput from './searchInput';
+import ArtistCard from './artistCard';
 
 const SearchPage = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -9,6 +12,7 @@ const SearchPage = () => {
     setLoading(true);
     try {
       const data = await fetchArtistsByName(term);
+      console.log("Fetched artists:", data);
       setArtists(data || []);
     } 
     catch (error) {
@@ -28,7 +32,7 @@ const SearchPage = () => {
       {loading && <p>Searching...</p>}
 
       <div className="artist-results">
-        {artists.length > 0 ? (<div> ArtistCard </div>) : (
+        {artists.length > 0 ? (<ArtistCard/>) : (
           !loading && <p>No results found yet.</p>
         )}
       </div>

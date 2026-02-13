@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SearchComp from './components/search/searchComp';
-import ArtistDetails from './components/search/artistDetails';
+import SearchComp from './components/searchComp';
+import ArtistDetails from './components/artistDetails';
 import './App.css'
 
 function App() {

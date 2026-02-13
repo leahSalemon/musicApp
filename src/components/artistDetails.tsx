@@ -1,9 +1,9 @@
 import React from 'react';
-const ArtistDetail = () => {
+const ArtistDetails = () => {
   return (
     <div className="p-8">
      artist details
     </div>
   );
 };
-export default ArtistDetail;
+export default ArtistDetails;
