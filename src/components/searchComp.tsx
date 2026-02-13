@@ -32,7 +32,7 @@ const SearchPage = () => {
       {loading && <p>Searching...</p>}
 
       <div className="artist-results">
-        {artists.length > 0 ? (<ArtistCard/>) : (
+        {artists.length > 0 ? (<ArtistCard artist={ artists[0]}/>) : (
           !loading && <p>No results found yet.</p>
         )}
       </div>
