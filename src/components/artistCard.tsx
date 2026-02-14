@@ -23,7 +23,7 @@ const ArtistCard = ({ artist }: ArtistCardProps) => {
           className="artist-card-image"
         />
         <div className="artist-card-overlay">
-          <span className="artist-card-overlay-text">צפה בפרטים נוספים ←</span>
+          <span className="artist-card-overlay-text"> ← View Details</span>
         </div>
       </div>
       <div className="artist-card-info">
