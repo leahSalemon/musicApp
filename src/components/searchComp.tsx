@@ -3,25 +3,22 @@ import { Artist } from '../types/interfaces';
 import { fetchArtistsByName } from '../api/musicServices';
 import SearchInput from './searchInput';
 import ArtistCard from './artistCard';
+import { useFetch } from '../hooks/useFetch';
 import './searchComp.css';
 
 const SearchComp = () => {
-  const [artists, setArtists] = useState<Artist[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { data: artists, loading, error, execute: searchArtist } = useFetch< Artist [ ] , string >(fetchArtistsByName);
   const [wasSearched, setWasSearched] = useState<boolean>(false);
 
   const handleSearch = async (term: string) => {
-    setLoading(true);
+    if (!term.trim()) 
+      return;
     try {
-      const data = await fetchArtistsByName(term);
-      setArtists(data || []);
+      await searchArtist(term);
       setWasSearched(true);
     }
     catch (error) {
       console.error("Error fetching artists:", error);
-    } 
-    finally {
-      setLoading(false);
     }
   };
 
@@ -29,23 +26,22 @@ const SearchComp = () => {
     if (wasSearched &&  !loading) {
       return <p>No results found yet.</p>;
     }
+    return null;
   }
 
   const displayArtists = () => {
-    return artists.length > 0 ? (
-      artists.map(artist => <ArtistCard key={artist.id} artist={artist} />)
-    ) : (
-      !loading && <p>No results found yet.</p>
-    );
+    return artists?.map(artist => <ArtistCard key={artist.id} artist={artist} />);
   };
+
+  const displayArtistResults = () => artists && artists.length > 0 ? displayArtists() : displayNoResults();
 
   return (
     <div className="search-comp">
       <h1>Music Search</h1>
       <SearchInput onSearch={handleSearch} loadingSearch={loading} />
-
+      { error && < p className="error-msg" > { error } </p> }
       <div className="artist-results">
-        { artists.length > 0 ? displayArtists() : displayNoResults() }
+        { displayArtistResults() }
       </div>
     </div>
   );
