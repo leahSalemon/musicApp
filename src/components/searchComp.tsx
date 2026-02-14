@@ -23,6 +23,14 @@ const SearchComp = () => {
     }
   };
 
+  const displayArtists = () => {
+    return artists.length > 0 ? (
+      artists.map(artist => <ArtistCard key={artist.id} artist={artist} />)
+    ) : (
+      !loading && <p>No results found yet.</p>
+    );
+  };
+
   return (
     <div className="search-comp">
       <h1>Music Search</h1>
@@ -32,9 +40,7 @@ const SearchComp = () => {
       {loading && <p>Searching...</p>}
 
       <div className="artist-results">
-        {artists.length > 0 ? (<ArtistCard artist={ artists[0]}/>) : (
-          !loading && <p>No results found yet.</p>
-        )}
+        {displayArtists()}
       </div>
     </div>
   );
