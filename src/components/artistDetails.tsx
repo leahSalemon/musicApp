@@ -5,7 +5,6 @@ import { ArtistFullDetails, Track } from '../types/interfaces';
 import { useFetch } from '../hooks/useFetch';
 import './artistDetails.css';
 
-
 const ArtistDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -24,7 +23,8 @@ const ArtistDetails = () => {
   }, [artist?.name, getTracks]);
 
   if (loadingArtist || loadingTracks) return <div className="loader">🎸 Tuning the instruments... Please wait.</div>;
-  if (!loadingArtist && !artist) return <div className="error">🧐 We couldn't find that artist. Maybe try another one?</div>;
+  if (errorArtist) return <div className="error">🧐 Oops! {errorArtist}</div>;
+  if (!loadingArtist && !artist) return <div className="error">🤷‍♂️ We couldn't find details for this artist.</div>;
 
   return (
     <div className="artist-page-container">
