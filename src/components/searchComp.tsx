@@ -8,12 +8,14 @@ import './searchComp.css';
 const SearchComp = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [wasSearched, setWasSearched] = useState<boolean>(false);
 
   const handleSearch = async (term: string) => {
     setLoading(true);
     try {
       const data = await fetchArtistsByName(term);
       setArtists(data || []);
+      setWasSearched(true);
     }
     catch (error) {
       console.error("Error fetching artists:", error);
@@ -22,6 +24,12 @@ const SearchComp = () => {
       setLoading(false);
     }
   };
+
+  const displayNoResults = () => {
+    if (wasSearched &&  !loading) {
+      return <p>No results found yet.</p>;
+    }
+  }
 
   const displayArtists = () => {
     return artists.length > 0 ? (
@@ -34,13 +42,10 @@ const SearchComp = () => {
   return (
     <div className="search-comp">
       <h1>Music Search</h1>
-    
       <SearchInput onSearch={handleSearch} loadingSearch={loading} />
 
-      {loading && <p>Searching...</p>}
-
       <div className="artist-results">
-        {displayArtists()}
+        { artists.length > 0 ? displayArtists() : displayNoResults() }
       </div>
     </div>
   );
