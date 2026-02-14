@@ -59,7 +59,7 @@ const ArtistDetails = () => {
         <h2>3 Top Tracks</h2>
         <div className="tracks-list">
           {tracks && tracks.length > 0 ? (
-            tracks?.map((track, index) => (
+            tracks?.slice(0, 3).map((track, index) => (
               <div key={track.id || index} className="track-card">
                 <span className="track-number">0{index + 1}</span>
                 <div className="track-details">
