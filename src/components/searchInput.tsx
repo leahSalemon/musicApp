@@ -11,6 +11,7 @@ const SearchInput = memo((props: SearchInputProps) => {
   const { onSearch, loadingSearch, initialSearchTerm } = props;
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm || '');
   const inputRef = useRef<HTMLInputElement>(null);
+  const lastSearchedRef = useRef(initialSearchTerm);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -19,6 +20,10 @@ const SearchInput = memo((props: SearchInputProps) => {
   }, []);
 
   useEffect(() => {
+    if (lastSearchedRef.current === searchTerm) {
+      return;
+    }
+    lastSearchedRef.current = searchTerm;
     if (!searchTerm.trim()) return;
     const timer = setTimeout(() => {
       onSearch(searchTerm);
