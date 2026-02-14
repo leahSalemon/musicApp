@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Artist } from '../types/interfaces';
 import { fetchArtistsByName } from '../api/musicServices';
 import SearchInput from './searchInput';
@@ -6,21 +6,29 @@ import ArtistCard from './artistCard';
 import { useFetch } from '../hooks/useFetch';
 import './searchComp.css';
 
-const SearchComp = () => {
-  const { data: artists, loading, error, execute: searchArtist } = useFetch< Artist [ ] , string >(fetchArtistsByName);
-  const [wasSearched, setWasSearched] = useState<boolean>(false);
+interface SearchCompProps {
+  initialArtists: Artist[];
+  onUpdateArtists: (artists: Artist[]) => void;
+  lastSearch: string;
+  onUpdateSearch: (term: string) => void;
+}
 
-  const handleSearch = async (term: string) => {
-    if (!term.trim()) 
-      return;
+const SearchComp = (props: SearchCompProps) => {
+  const { initialArtists, lastSearch, onUpdateArtists, onUpdateSearch } = props;
+  const { loading, error, execute: searchArtist } = useFetch< Artist [ ] , string >(fetchArtistsByName);
+  const [wasSearched, setWasSearched] = useState<boolean>(initialArtists.length > 0);
+
+  const handleSearch = useCallback(async (term: string): Promise<void> => {
+    if (!term.trim()) return;
     try {
-      await searchArtist(term);
+      const results = await searchArtist(term);
       setWasSearched(true);
-    }
-    catch (error) {
+      onUpdateArtists(results || []);
+      onUpdateSearch(term);
+    } catch (error) {
       console.error("Error fetching artists:", error);
     }
-  };
+  }, [searchArtist, onUpdateArtists, onUpdateSearch]);
 
   const displayNoResults = () => {
     if (wasSearched &&  !loading) {
@@ -30,15 +38,15 @@ const SearchComp = () => {
   }
 
   const displayArtists = () => {
-    return artists?.map(artist => <ArtistCard key={artist.id} artist={artist} />);
+    return initialArtists?.map(artist => <ArtistCard key={artist.id} artist={artist} />);
   };
 
-  const displayArtistResults = () => artists && artists.length > 0 ? displayArtists() : displayNoResults();
+  const displayArtistResults = () => initialArtists && initialArtists.length > 0 ? displayArtists() : displayNoResults();
 
   return (
     <div className="search-comp">
       <h1>Music Search</h1>
-      <SearchInput onSearch={handleSearch} loadingSearch={loading} />
+      <SearchInput onSearch={handleSearch} loadingSearch={loading} initialSearchTerm={lastSearch} />
       { error && < p className="error-msg" > { error } </p> }
       <div className="artist-results">
         { displayArtistResults() }

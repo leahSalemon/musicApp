@@ -6,11 +6,7 @@ export const apiCall = async (endpoint: string) => {
   if (!response.ok) {
     throw new Error('בעיה בתקשורת עם השרת');
   }
-  
-  const data = await response.json(); 
-  
-  console.log('API Response Data:', data);
-  return data;
+  return await response.json(); 
 };
 
 export default apiCall;

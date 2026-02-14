@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 import './searchInput.css';
 
 interface SearchInputProps {
   onSearch: (term: string) => void;
   loadingSearch: boolean;
+  initialSearchTerm?: string;
 }
 
-const SearchInput = (props: SearchInputProps) => {
-  const { onSearch, loadingSearch } = props;
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchInput = memo((props: SearchInputProps) => {
+  const { onSearch, loadingSearch, initialSearchTerm } = props;
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm || '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -37,6 +38,6 @@ const SearchInput = (props: SearchInputProps) => {
         {loadingSearch ? <span className="spinner"></span> : 'Search'}</button>
     </form>
   );
-};
+});
 
 export default SearchInput;
