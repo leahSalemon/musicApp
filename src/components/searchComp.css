@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* רקע מדורג רך */
   padding: 80px 20px;
   font-family: 'Inter', system-ui, sans-serif;
@@ -44,4 +44,33 @@
   font-size: 1.2rem;
   margin-top: 40px;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+.search-comp {
+padding: 20px 10px !important;
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+width: 100% !important;
+}
+
+.search-comp h1 {
+font-size: 2.2rem !important;
+text-align: center !important;
+width: 100% !important;
+margin: 0 0 20px 0 !important;
+}
+
+.artist-results {
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+width: 100% !important;
+}
+
+.artist-card {
+width: 280px !important;
+margin: 0 auto 20px auto !important;
+}
 }
