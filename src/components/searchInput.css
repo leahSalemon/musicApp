@@ -51,3 +51,16 @@
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
+.search-input button:disabled {
+  background-color: #cbd5e0;
+  color: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.search-input button:disabled:hover {
+  background-color: #cbd5e0;
+  transform: none;
+}

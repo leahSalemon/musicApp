@@ -14,7 +14,7 @@ const SearchComp = () => {
     try {
       const data = await fetchArtistsByName(term);
       setArtists(data || []);
-    } 
+    }
     catch (error) {
       console.error("Error fetching artists:", error);
     } 
@@ -27,7 +27,7 @@ const SearchComp = () => {
     <div className="search-comp">
       <h1>Music Search</h1>
     
-      <SearchInput onSearch={handleSearch} />
+      <SearchInput onSearch={handleSearch} loadingSearch={loading} />
 
       {loading && <p>Searching...</p>}
 

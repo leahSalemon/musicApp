@@ -3,10 +3,11 @@ import './searchInput.css';
 
 interface SearchInputProps {
   onSearch: (term: string) => void;
+  loadingSearch: boolean;
 }
 
 const SearchInput = (props: SearchInputProps) => {
-  const { onSearch } = props;
+  const { onSearch, loadingSearch } = props;
   const [searchTerm, setSearchTerm] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,7 +33,8 @@ const SearchInput = (props: SearchInputProps) => {
         placeholder="Search for artists..."
         ref={inputRef}
       />
-      <button type="submit">Search</button>
+      <button type="submit" disabled={!searchTerm.trim() || loadingSearch }>
+        {loadingSearch ? <span className="spinner"></span> : 'Search'}</button>
     </form>
   );
 };
