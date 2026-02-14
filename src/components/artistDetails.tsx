@@ -2,46 +2,36 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchArtistById, fetchTopTracks } from '../api/musicServices';
 import { ArtistFullDetails, Track } from '../types/interfaces';
+import { useFetch } from '../hooks/useFetch';
 import './artistDetails.css';
+
 
 const ArtistDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   
-  const [artist, setArtist] = useState<ArtistFullDetails | null>(null);
-  const [tracks, setTracks] = useState<Track[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const loadArtistData = async () => {
-    if (!id) return;
-    setLoading(true);
-    try {
-      const artistData = await fetchArtistById(id);
-      if (artistData) {
-        setArtist(artistData);
-        const tracksData = await fetchTopTracks(artistData.name);
-        setTracks(tracksData);
-      }
-    } catch (error) {
-      console.error("Error loading artist details:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { data: artist, loading: loadingArtist, error: errorArtist, execute: getArtist } = useFetch<ArtistFullDetails | null, string> (fetchArtistById);
+  const { data: tracks, loading: loadingTracks, error: errorTracks, execute: getTracks } = useFetch < Track [ ] , string > (fetchTopTracks);
 
   useEffect(() => {
-    loadArtistData();
-  }, [id]);
+    if(id)
+      getArtist(id);
+  }, [id, getArtist]);
 
-  if (loading) return <div className="loader"> Loading data...</div>;
-  if (!artist) return <div className="error">Artist not found.</div>;
+  useEffect(() => {
+    if (artist?.name) 
+      getTracks(artist.name);
+  }, [artist?.name, getTracks]);
+
+  if (loadingArtist || loadingTracks) return <div className="loader">🎸 Tuning the instruments... Please wait.</div>;
+  if (!loadingArtist && !artist) return <div className="error">🧐 We couldn't find that artist. Maybe try another one?</div>;
 
   return (
     <div className="artist-page-container">
       <button className="back-btn" onClick={() => navigate(-1)}>
         <span>←</span> Back to Search
       </button>
-
+      { artist && (
       <header className="artist-header">
         <div className="image-wrapper">
           <img 
@@ -63,13 +53,13 @@ const ArtistDetails = () => {
             <p>{artist.biography || "No biography available for this artist"}</p>
           </div>
         </div>
-      </header>
+      </header>) }
 
       <section className="top-tracks-section">
         <h2>3 Top Tracks</h2>
         <div className="tracks-list">
-          {tracks.length > 0 ? (
-            tracks.map((track, index) => (
+          {tracks && tracks.length > 0 ? (
+            tracks?.map((track, index) => (
               <div key={track.id || index} className="track-card">
                 <span className="track-number">0{index + 1}</span>
                 <div className="track-details">
@@ -85,7 +75,7 @@ const ArtistDetails = () => {
               </div>
             ))
           ) : (
-            <p className="no-tracks">No top tracks available for this artist.</p>
+            <p className="no-tracks">🤷‍♂️ Oops! No top tracks available for this artist right now.</p>
           )}
         </div>
       </section>
