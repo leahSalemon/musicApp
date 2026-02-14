@@ -18,6 +18,15 @@ const SearchInput = memo((props: SearchInputProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (!searchTerm.trim()) return;
+    const timer = setTimeout(() => {
+      onSearch(searchTerm);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [searchTerm, onSearch]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -35,7 +44,7 @@ const SearchInput = memo((props: SearchInputProps) => {
         ref={inputRef}
       />
       <button type="submit" disabled={!searchTerm.trim() || loadingSearch }>
-        {loadingSearch ? <span className="spinner"></span> : 'Search'}</button>
+        {loadingSearch ? <span className="spinner-small"></span> : 'Search'}</button>
     </form>
   );
 });
