@@ -5,7 +5,6 @@ import ArtistDetails from './components/artistDetails';
 import { Artist } from './types/interfaces';
 import './App.css'
 
-
 function App() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [lastSearch, setLastSearch] = useState('');
