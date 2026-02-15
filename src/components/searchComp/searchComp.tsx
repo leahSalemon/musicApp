@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
-import { Artist } from '../types/interfaces';
-import { fetchArtistsByName } from '../api/musicServices';
-import SearchInput from './searchInput';
-import ArtistCard from './artistCard';
-import { useFetch } from '../hooks/useFetch';
+import { Artist } from '../../types/interfaces';
+import { fetchArtistsByName } from '../../api/musicServices';
+import SearchInput from '../searchInput/searchInput';
+import ArtistCard from '../artistCard/artistCard';
+import { useFetch } from '../../hooks/useFetch';
 import './searchComp.css';
 
 interface SearchCompProps {

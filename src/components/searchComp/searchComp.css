@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height: 100vh; */
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* רקע מדורג רך */
+  height: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 80px 20px;
   font-family: 'Inter', system-ui, sans-serif;
 }
@@ -28,7 +29,6 @@
   animation: fadeInUp 1s ease-out;
 }
 
-/* אנימציות כניסה */
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }

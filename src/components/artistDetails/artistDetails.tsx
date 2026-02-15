@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchArtistById, fetchTopTracks } from '../api/musicServices';
-import { ArtistFullDetails, Track } from '../types/interfaces';
-import { useFetch } from '../hooks/useFetch';
+import { fetchArtistById, fetchTopTracks } from '../../api/musicServices';
+import { ArtistFullDetails, Track } from '../../types/interfaces';
+import { useFetch } from '../../hooks/useFetch';
 import './artistDetails.css';
 
 const ArtistDetails = () => {

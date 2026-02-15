@@ -1,4 +1,4 @@
-import { Artist } from '../types/interfaces';
+import { Artist } from '../../types/interfaces';
 import { useNavigate } from 'react-router-dom';
 import './ArtistCard.css';
 
