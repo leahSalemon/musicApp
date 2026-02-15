@@ -1,16 +1,31 @@
-# React + Vite
+# 🎵 Music Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, modern music search application built with React and TypeScript, powered by the iTunes Search API. This project showcases a clean architecture, smooth user experience, and full device compatibility.
 
-Currently, two official plugins are available:
+## 🧠 Tech Stack & Architecture
+### Frontend: React (Vite) & TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Custom useFetch Hook: A reusable, type-safe hook (using TypeScript Generics) to manage API states like loading and data fetching.
 
-## React Compiler
+* Service Layer: Decoupled API logic in musicServices.ts for better maintainability.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Data Conversions: Dedicated conversion logic to map raw API data into clean, frontend-ready objects.
 
-## Expanding the ESLint configuration
+* Performance: Optimized with React.memo and useCallback to ensure 60fps performance.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Key Features
+
+* Full Responsive Design: The entire UI is built to be 100% responsive, providing a seamless experience from small mobile screens to large desktop monitors.
+
+* Smooth Animations: Integrated fluid CSS transitions and animations that make the interface feel alive and premium.
+
+* Smart Auto-Search: High-performance search with a built-in debounce mechanism to optimize API usage.
+
+* Polished UX: Every interaction is designed to be stable and intuitive, ensuring a high-end feel for the user.
+
+
+## 🚀 How to Run
+
+1. Clone the repository.
+2. Run `npm install`.
+3. Run `npm run dev`.
